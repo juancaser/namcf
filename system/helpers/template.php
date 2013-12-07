@@ -138,4 +138,58 @@ function the_post(){
      return $tpl->post;
 }
 
+
+/**-------------------------------------------------------------------------------------
+ * Template Utils
+ -------------------------------------------------------------------------------------*/
+
+/**
+ * Return  site information
+ *
+ * @since b0.1
+ * @return string Site information
+ */
+function get_siteinfo($key){
+	switch($key){
+		case 'name':
+			if(get_config('name','site')!= 'NULL')
+				return get_config('name','site');
+			break;
+		case 'description':
+			if(get_config('description','site')!= 'NULL')
+				return get_config('description','site');
+			break;
+		case 'keyword':
+			if(get_config('keyword','site')!= 'NULL')
+				return get_config('keyword','site');
+			break;
+		case 'charset':
+			if(defined('charset')){
+				return charset;
+			}elseif(get_config('charset','site')!= 'NULL'){
+				return get_config('charset','site');
+			}				
+			break;
+		case 'url':
+		case 'siteurl':
+			return DOMAIN;
+			break;
+		default:
+			return;
+			
+	}
+}
+
+/**
+ * Display site information
+ *
+ * @uses get_siteinfo()
+ *
+ * @since b0.1
+ * @return string Site information
+ */
+function siteinfo($key){
+	echo get_siteinfo($key);
+}
+
 ?>
